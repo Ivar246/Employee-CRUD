@@ -4,9 +4,7 @@ const Employee = require("../models/Employee");
 const index = (req, res, next) => {
   Employee.find()
     .then((response) => {
-      res.json({
-        response,
-      });
+      res.json({ response });
     })
     .catch((err) => {
       res.json({ message: "An Error occoured" });
@@ -15,8 +13,8 @@ const index = (req, res, next) => {
 
 // show single employee
 const show = (req, res, next) => {
-  let employeeId = req.body.employeeId;
-  Employee.findById(employeeId)
+  let EmployeeID = req.body.employeeID;
+  Employee.findById(EmployeeID)
     .then((response) => {
       res.json({ response });
     })
@@ -26,6 +24,7 @@ const show = (req, res, next) => {
 };
 
 const store = (req, res, next) => {
+  console.log(req.body);
   let employee = new Employee({
     name: req.body.name,
     designation: req.body.designation,
@@ -37,6 +36,7 @@ const store = (req, res, next) => {
     .save()
     .then((response) => {
       res.json({
+        response,
         message: "employee added succesfully",
       });
     })
