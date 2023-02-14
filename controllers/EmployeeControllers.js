@@ -24,7 +24,6 @@ const show = (req, res, next) => {
 };
 
 const store = (req, res, next) => {
-  console.log(req.body);
   let employee = new Employee({
     name: req.body.name,
     designation: req.body.designation,
@@ -32,6 +31,10 @@ const store = (req, res, next) => {
     phone: req.body.phone,
     age: req.body.age,
   });
+
+  if (req.file) {
+    employee.avatar = req.file.path;
+  }
   employee
     .save()
     .then((response) => {
